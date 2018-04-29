@@ -1,0 +1,50 @@
+﻿@model IEnumerable<QuanLiKS.Models.ChiTietThue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Mã thuê</th>
+        <th>
+            @Html.DisplayNameFor(model => model.STT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CMND)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.MaThue
+        </td>
+        <td>
+            @item.STT
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CMND)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.STT }) |
+            @Html.ActionLink("Details", "Details", new { id=item.STT }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.STT })
+        </td>
+    </tr>
+}
+
+</table>

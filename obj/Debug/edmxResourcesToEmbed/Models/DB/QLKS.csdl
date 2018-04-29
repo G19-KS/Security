@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KhachSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Backup_LK">
+    <Key>
+      <PropertyRef Name="MaLoaiKhach" />
+    </Key>
+    <Property Name="MaLoaiKhach" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenLoaiKhach" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ChiTietHD">
+    <Key>
+      <PropertyRef Name="IDCTHD" />
+    </Key>
+    <Property Name="IDCTHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SoHD" Type="Int32" Nullable="false" />
+    <Property Name="MaThue" Type="Int32" />
+    <Property Name="SoNgayO" Type="Int32" />
+    <Property Name="Tien" Type="Int32" />
+    <NavigationProperty Name="HoaDon" Relationship="Self.FK_ChiTietHD_HoaDon" FromRole="ChiTietHD" ToRole="HoaDon" />
+    <NavigationProperty Name="PhongThue" Relationship="Self.FK_ChiTietHD_PhongThue1" FromRole="ChiTietHD" ToRole="PhongThue" />
+  </EntityType>
+  <EntityType Name="ChiTietThue">
+    <Key>
+      <PropertyRef Name="MaThue" />
+      <PropertyRef Name="STT" />
+    </Key>
+    <Property Name="MaThue" Type="Int32" Nullable="false" />
+    <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MaKH" Type="Int32" />
+    <NavigationProperty Name="PhongThue" Relationship="Self.FK_ChiTietThue_PhongThue" FromRole="ChiTietThue" ToRole="PhongThue" />
+  </EntityType>
+  <EntityType Name="DangNhap">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="TaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="SoHD" />
+    </Key>
+    <Property Name="SoHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ngay" Type="DateTime" Precision="0" />
+    <Property Name="MaKH" Type="Int32" />
+    <NavigationProperty Name="ChiTietHDs" Relationship="Self.FK_ChiTietHD_HoaDon" FromRole="HoaDon" ToRole="ChiTietHD" />
+    <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="MaKH" />
+    </Key>
+    <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaLoaiKhach" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenKhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GioiTinh" Type="Boolean" />
+    <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
+    <NavigationProperty Name="LoaiKhach" Relationship="Self.FK_KhachHang_LoaiKhach" FromRole="KhachHang" ToRole="LoaiKhach" />
+  </EntityType>
+  <EntityType Name="LoaiKhach">
+    <Key>
+      <PropertyRef Name="MaLoaiKhach" />
+    </Key>
+    <Property Name="MaLoaiKhach" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenLoaiKhach" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KhachHangs" Relationship="Self.FK_KhachHang_LoaiKhach" FromRole="LoaiKhach" ToRole="KhachHang" />
+  </EntityType>
+  <EntityType Name="LoaiPhong">
+    <Key>
+      <PropertyRef Name="MaLoaiPhong" />
+    </Key>
+    <Property Name="MaLoaiPhong" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gia" Type="Int32" />
+    <NavigationProperty Name="Phongs" Relationship="Self.FK_Phong_LoaiPhong" FromRole="LoaiPhong" ToRole="Phong" />
+  </EntityType>
+  <EntityType Name="Phong">
+    <Key>
+      <PropertyRef Name="MaPhong" />
+    </Key>
+    <Property Name="MaPhong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaLoaiPhong" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TinhTrang" Type="Boolean" />
+    <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LoaiPhong" Relationship="Self.FK_Phong_LoaiPhong" FromRole="Phong" ToRole="LoaiPhong" />
+    <NavigationProperty Name="PhongThues" Relationship="Self.FK_PhongThue_Phong" FromRole="Phong" ToRole="PhongThue" />
+  </EntityType>
+  <EntityType Name="PhongThue">
+    <Key>
+      <PropertyRef Name="MaThue" />
+    </Key>
+    <Property Name="MaThue" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SoHD" Type="Int32" />
+    <Property Name="MaPhong" Type="Int32" />
+    <Property Name="NgayDen" Type="DateTime" Precision="0" />
+    <Property Name="NgayDi" Type="DateTime" Precision="0" />
+    <Property Name="SoLuong" Type="Int32" />
+    <NavigationProperty Name="ChiTietHDs" Relationship="Self.FK_ChiTietHD_PhongThue1" FromRole="PhongThue" ToRole="ChiTietHD" />
+    <NavigationProperty Name="ChiTietThues" Relationship="Self.FK_ChiTietThue_PhongThue" FromRole="PhongThue" ToRole="ChiTietThue" />
+    <NavigationProperty Name="Phong" Relationship="Self.FK_PhongThue_Phong" FromRole="PhongThue" ToRole="Phong" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ThamSo">
+    <Key>
+      <PropertyRef Name="MaTS" />
+    </Key>
+    <Property Name="MaTS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GiaTri" Type="Int32" />
+    <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_ChiTietHD_HoaDon">
+    <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ChiTietHD" Type="Self.ChiTietHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HoaDon">
+        <PropertyRef Name="SoHD" />
+      </Principal>
+      <Dependent Role="ChiTietHD">
+        <PropertyRef Name="SoHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietHD_PhongThue1">
+    <End Role="PhongThue" Type="Self.PhongThue" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ChiTietHD" Type="Self.ChiTietHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhongThue">
+        <PropertyRef Name="MaThue" />
+      </Principal>
+      <Dependent Role="ChiTietHD">
+        <PropertyRef Name="MaThue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietThue_PhongThue">
+    <End Role="PhongThue" Type="Self.PhongThue" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ChiTietThue" Type="Self.ChiTietThue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhongThue">
+        <PropertyRef Name="MaThue" />
+      </Principal>
+      <Dependent Role="ChiTietThue">
+        <PropertyRef Name="MaThue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HoaDon_KhachHang">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="HoaDon">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KhachHang_LoaiKhach">
+    <End Role="LoaiKhach" Type="Self.LoaiKhach" Multiplicity="0..1" />
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiKhach">
+        <PropertyRef Name="MaLoaiKhach" />
+      </Principal>
+      <Dependent Role="KhachHang">
+        <PropertyRef Name="MaLoaiKhach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phong_LoaiPhong">
+    <End Role="LoaiPhong" Type="Self.LoaiPhong" Multiplicity="0..1" />
+    <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiPhong">
+        <PropertyRef Name="MaLoaiPhong" />
+      </Principal>
+      <Dependent Role="Phong">
+        <PropertyRef Name="MaLoaiPhong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhongThue_Phong">
+    <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
+    <End Role="PhongThue" Type="Self.PhongThue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phong">
+        <PropertyRef Name="MaPhong" />
+      </Principal>
+      <Dependent Role="PhongThue">
+        <PropertyRef Name="MaPhong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KhachSanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Backup_LK" EntityType="Self.Backup_LK" />
+    <EntitySet Name="ChiTietHDs" EntityType="Self.ChiTietHD" />
+    <EntitySet Name="ChiTietThues" EntityType="Self.ChiTietThue" />
+    <EntitySet Name="DangNhaps" EntityType="Self.DangNhap" />
+    <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
+    <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+    <EntitySet Name="LoaiKhaches" EntityType="Self.LoaiKhach" />
+    <EntitySet Name="LoaiPhongs" EntityType="Self.LoaiPhong" />
+    <EntitySet Name="Phongs" EntityType="Self.Phong" />
+    <EntitySet Name="PhongThues" EntityType="Self.PhongThue" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="ThamSoes" EntityType="Self.ThamSo" />
+    <AssociationSet Name="FK_ChiTietHD_HoaDon" Association="Self.FK_ChiTietHD_HoaDon">
+      <End Role="HoaDon" EntitySet="HoaDons" />
+      <End Role="ChiTietHD" EntitySet="ChiTietHDs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietHD_PhongThue1" Association="Self.FK_ChiTietHD_PhongThue1">
+      <End Role="PhongThue" EntitySet="PhongThues" />
+      <End Role="ChiTietHD" EntitySet="ChiTietHDs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietThue_PhongThue" Association="Self.FK_ChiTietThue_PhongThue">
+      <End Role="PhongThue" EntitySet="PhongThues" />
+      <End Role="ChiTietThue" EntitySet="ChiTietThues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="HoaDon" EntitySet="HoaDons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KhachHang_LoaiKhach" Association="Self.FK_KhachHang_LoaiKhach">
+      <End Role="LoaiKhach" EntitySet="LoaiKhaches" />
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phong_LoaiPhong" Association="Self.FK_Phong_LoaiPhong">
+      <End Role="LoaiPhong" EntitySet="LoaiPhongs" />
+      <End Role="Phong" EntitySet="Phongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhongThue_Phong" Association="Self.FK_PhongThue_Phong">
+      <End Role="Phong" EntitySet="Phongs" />
+      <End Role="PhongThue" EntitySet="PhongThues" />
+    </AssociationSet>
+    <FunctionImport Name="searchKH" ReturnType="Collection(KhachSanModel.searchKH_Result)">
+      <Parameter Name="search" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="searchKH_Result">
+    <Property Type="Int32" Name="MaKH" Nullable="false" />
+    <Property Type="String" Name="MaLoaiKhach" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="TenKhach" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="GioiTinh" Nullable="true" />
+    <Property Type="String" Name="CMND" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,60 @@
+﻿@model QuanLiKS.Models.ChiTietHD
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">  
+    
+    <h2>Thanh Toán</h2>  
+            <span>
+                Mã hóa đơn:
+            </span>
+
+            <input id="sohd" value="@Model.SoHD" readonly/>
+                        
+            <p>
+                Phòng:
+            </p>
+
+            <p>
+                @Model.PhongThue.Phong.MaPhong
+            </p>
+
+            <span>
+                Số ngày ở:
+            </span>
+
+            <p>
+                @Model.SoNgayO
+            </p>
+
+            <span>
+                Số tiền phải trả:
+            </span>
+
+            <p>
+                @Model.Tien
+            </p>    
+        <div class="container-contact100-form-btn">
+            <a class="btn btn-info" onclick="tinhTien();">              
+                    Thanh toán                                   </a>
+        </div>
+
+
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCTHD }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+
+@*<!DOCTYPE html>
+<script src="~/TinhTien/tinhtien.js"></script>
+<html>
+<body>
+
+    
+</body>
+</html>*@

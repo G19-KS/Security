@@ -1,0 +1,64 @@
+﻿@model IEnumerable<QuanLiKS.Models.PhongThue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thuê Phòng</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            MaThue
+        </th>
+        <th>
+            SoHD
+        </th>
+        <th>
+            MaPhong
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDi)
+        </th>
+        <th>
+            SoLuong
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem=> item.MaThue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoHD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaPhong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDi)
+        </td>
+        <td>
+            @item.SoLuong
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaThue }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaThue }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaThue })
+        </td>
+    </tr>
+}
+
+</table>

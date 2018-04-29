@@ -1,0 +1,46 @@
+﻿@model IEnumerable<QuanLiKS.Models.HoaDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Mã hóa đơn</th>
+        <th>
+          Mã khách hàng
+        </th> 
+        
+        <th>Tên khách hàng</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ngay)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.SoHD)</td>
+        <td>
+           @item.KhachHang.MaKH
+        </td>
+        <td>@item.KhachHang.TenKhach</td>
+        <td>
+           @item.Ngay
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SoHD }) |
+            @Html.ActionLink("Tính tiền", "TinhTien", new { id=item.SoHD }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SoHD },new { onclick="return confirm('Muon xoa khong ? ');"})
+        </td>
+    </tr>
+}
+
+</table>

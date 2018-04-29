@@ -1,0 +1,57 @@
+﻿@model QuanLiKS.Models.PhongThue
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PhongThue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Phong.MaLoaiPhong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phong.MaLoaiPhong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoHD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoHD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

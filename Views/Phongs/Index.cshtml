@@ -1,0 +1,54 @@
+﻿@model IEnumerable<QuanLiKS.Models.Phong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center" style="color:#ac1717">Danh Mục Phòng</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Phòng</th>
+        <th>
+            Loại Phòng
+        </th>
+        <th>
+            Đơn Giá
+        </th>
+        <th>Tình trạng</th>
+        <th>
+            Ghi Chú
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaPhong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiPhong.MaLoaiPhong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiPhong.Gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TinhTrang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaPhong }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MaPhong }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MaPhong })
+        </td>
+    </tr>
+}
+
+</table>

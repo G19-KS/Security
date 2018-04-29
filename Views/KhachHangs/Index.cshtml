@@ -1,0 +1,111 @@
+﻿@model IEnumerable<QuanLiKS.Models.KhachHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center" style="color:#ba2727">Danh mục khách hàng </h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<!-- Example DataTables Card-->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Bảng danh sách khách hàng
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>MaKH</th>
+                        <th>MaLoaiKhach</th>
+                        <th>TenKhach</th>
+                        <th>GioiTinh</th>
+                        <th>CMND</th>
+                        <th>DiaChi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                     
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.MaKH</td>
+                        <td>@item.MaLoaiKhach</td>
+                        <td>@item.TenKhach</td>
+                        <td>@item.GioiTinh</td>
+                        <td>@item.CMND</td>
+                        <td>@item.DiaChi</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MaKH }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MaKH })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*<table class="table">
+        <tr>
+            <th>
+               MaKH
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiKhach.MaLoaiKhach)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKhach)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMND)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiKhach.MaLoaiKhach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CMND)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaKH }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaKH }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaKH })
+            </td>
+        </tr>
+    }
+
+    </table>*@
